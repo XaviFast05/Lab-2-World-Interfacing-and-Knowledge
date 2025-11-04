@@ -24,6 +24,8 @@ public class ZombieBehaviour : MonoBehaviour
     float cooldownPursue = 0;
     Vector3 wanderTarget = Vector3.zero;
 
+    Transform smellTarget = null;
+
     private void Awake()
     {
         _agent = GetComponent<NavMeshAgent>();
@@ -32,6 +34,8 @@ public class ZombieBehaviour : MonoBehaviour
 
     void Start()
     {
+        cooldownWander = updatePointTime;
+        cooldownPursue = stopPursueTime;
     }
 
     void Seek(Vector3 location)
@@ -65,6 +69,7 @@ public class ZombieBehaviour : MonoBehaviour
             shotRayPosition.y += 1;
             if (Physics.Raycast(shotRayPosition, rayToTarget, out raycastInfo))
             {
+                Debug.Log(raycastInfo.collider.gameObject.name);
                 if (raycastInfo.collider.gameObject.tag == "Player")
                 {
                     cooldownPursue = 0;
@@ -79,16 +84,14 @@ public class ZombieBehaviour : MonoBehaviour
     {
         cooldownWander += Time.deltaTime;
         cooldownPursue += Time.deltaTime;
-
-        Debug.Log(cooldownPursue);
         
         if (CanSeeTarget() || cooldownPursue < stopPursueTime)
         {
             Pursue();
         }
-        else if (false)////SMELL
+        else if (smellTarget != null)////SMELL
         {
-
+            Seek(smellTarget.position);
         }
         else
         {
@@ -100,6 +103,11 @@ public class ZombieBehaviour : MonoBehaviour
         }
 
         _animator.SetFloat("speed", _agent.velocity.magnitude);
+    }
+
+    public void SetSmellTransform(Transform T)
+    {
+        smellTarget = T;
     }
 }
 

@@ -15,6 +15,10 @@ public class Character : MonoBehaviour
     private bool run;
     private float runTimer;
 
+    public GameObject smellPrefab;
+    public float smellDropTime = 5.0f;
+    private float smellTimer = 0.0f;
+
     void Awake()
     {
         _agent = GetComponent<NavMeshAgent>();
@@ -27,6 +31,7 @@ public class Character : MonoBehaviour
     {
         run = false;
         runTimer = 0.5f;
+        smellTimer = 0.0f;
     }
 
     void Update()
@@ -80,5 +85,12 @@ public class Character : MonoBehaviour
         else destinationIndicator.SetActive(false);
 
             _animator.SetFloat("speed", _agent.velocity.magnitude);
+
+        smellTimer += Time.deltaTime * (run ? runSpeed/walkSpeed : 1);
+        if (smellTimer >= smellDropTime)
+        {
+            Instantiate(smellPrefab, transform.position, Quaternion.identity);
+            smellTimer = 0.0f;
+        }
     }
 }
