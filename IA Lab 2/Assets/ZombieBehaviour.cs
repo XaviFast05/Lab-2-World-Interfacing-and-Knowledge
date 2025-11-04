@@ -1,5 +1,6 @@
 using System;
 using UnityEditor.Experimental.GraphView;
+using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -11,9 +12,8 @@ public class ZombieBehaviour : MonoBehaviour
     Animator _animator;
 
     [Header("PURSUE")]
-    public float distanceToPursue = 10;
+    public float distanceToPursue = 20;
     public float lookAngleToPursue = 30;
-    public LayerMask layerToPursue = 30; 
     public float stopPursueTime = 5.0f;
 
     [Header("WANDER")]
@@ -21,9 +21,8 @@ public class ZombieBehaviour : MonoBehaviour
     public Vector3 mapBounds;
 
     float cooldownWander = 0;
-    float cooldownPursue = 0;
+    public float cooldownPursue = 0;
     Vector3 wanderTarget = Vector3.zero;
-
     Transform smellTarget = null;
 
     private void Awake()
@@ -60,23 +59,42 @@ public class ZombieBehaviour : MonoBehaviour
 
     bool CanSeeTarget()
     {
-        RaycastHit raycastInfo;
-        Vector3 rayToTarget = target.transform.position - transform.position;
-        float lookAngle = Vector3.Angle(this.transform.forward, rayToTarget);
-        if (lookAngle < lookAngleToPursue && rayToTarget.magnitude < distanceToPursue)
+        if (target == null)
         {
-            Vector3 shotRayPosition = transform.position;
-            shotRayPosition.y += 1;
-            if (Physics.Raycast(shotRayPosition, rayToTarget, out raycastInfo))
+            return false;
+        }
+
+        Vector3 origin = transform.position;
+        origin.y += 1.0f;
+
+        Vector3 targetCenter = target.transform.position;
+        targetCenter.y += 1.0f; 
+
+        Vector3 rayDirection = targetCenter - origin;
+
+        float distanceToTarget = rayDirection.magnitude;
+
+        float lookAngle = Vector3.Angle(transform.forward, rayDirection);
+
+        if (lookAngle < lookAngleToPursue && distanceToTarget < distanceToPursue)
+        {
+            RaycastHit hit;
+
+            bool didHit = Physics.Raycast(origin, rayDirection.normalized, out hit, distanceToTarget);
+           
+            Debug.DrawRay(origin, rayDirection);
+            Debug.Log(didHit);
+
+            if (didHit)
             {
-                Debug.Log(raycastInfo.collider.gameObject.name);
-                if (raycastInfo.collider.gameObject.tag == "Player")
+                if (hit.transform.tag == "Player")
                 {
                     cooldownPursue = 0;
                     return true;
                 }
             }
         }
+
         return false;
     }
 

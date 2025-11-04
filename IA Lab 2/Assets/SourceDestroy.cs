@@ -11,7 +11,7 @@ public class SourceDestroy : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if ( other.CompareTag("Zombie"))
+        if (other.CompareTag("Zombie"))
         {
             Destroy(gameObject);
         }

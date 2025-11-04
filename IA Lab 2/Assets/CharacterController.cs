@@ -52,7 +52,6 @@ public class Character : MonoBehaviour
 
             bool didHit = Physics.Raycast(ray, out hitInfo, Mathf.Infinity, groundLayer);
 
-
             if (didHit)
             {
                 Vector3 targetPoint = hitInfo.point;
