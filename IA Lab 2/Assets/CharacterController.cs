@@ -7,6 +7,7 @@ public class Character : MonoBehaviour
     private Camera _camera;
     private Animator _animator;
 
+    public GameObject destinationIndicator;
     public LayerMask groundLayer;
     public float walkSpeed;
     public float runSpeed;
@@ -71,6 +72,13 @@ public class Character : MonoBehaviour
         if (run) _agent.speed = runSpeed;
         else _agent.speed = walkSpeed;
 
-        _animator.SetFloat("speed", _agent.velocity.magnitude);
+        if (_agent.velocity.magnitude > 0.5f)
+        {
+            destinationIndicator.SetActive(true);
+            destinationIndicator.transform.position = _agent.destination;
+        }
+        else destinationIndicator.SetActive(false);
+
+            _animator.SetFloat("speed", _agent.velocity.magnitude);
     }
 }
