@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: ac1dc36d300e429408012bec9896e5b9
+guid: ea34284dd3d3d9245be013f845231865
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -7,8 +7,33 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: standardSurface1
-    second: {fileID: 2100000, guid: 269e71ac8ab1ccc41a55b346dcb15f52, type: 2}
+      name: Black
+    second: {fileID: 2100000, guid: c91a2a5de9152834197f12c3973fdd5d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Grey
+    second: {fileID: 2100000, guid: fa165a42f04459446a11f756eb5addc4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Red
+    second: {fileID: 2100000, guid: 5b7cc1af9a97a924788c563eb139d160, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Sack
+    second: {fileID: 2100000, guid: 2b1e0f08092e0b241812f00476c7d2f4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wood
+    second: {fileID: 2100000, guid: 9af23068d6c2e484a89f791b31c7effb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wood_Light
+    second: {fileID: 2100000, guid: 4e23badec18fab64685fc2904be38353, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

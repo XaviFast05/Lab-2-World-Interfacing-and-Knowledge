@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: ac1dc36d300e429408012bec9896e5b9
+guid: 7d0d32a12b1710f419ffb6a538b4e961
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -7,8 +7,18 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: standardSurface1
-    second: {fileID: 2100000, guid: 269e71ac8ab1ccc41a55b346dcb15f52, type: 2}
+      name: Atlas
+    second: {fileID: 2100000, guid: f89d5e5e97228154e9170a4a7ec91e0a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BrakeLight
+    second: {fileID: 2100000, guid: d601a7610b983cc45994b03549195a7e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Headlights
+    second: {fileID: 2100000, guid: c2f8e9f5941f7cb4d84efa607ff838b8, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

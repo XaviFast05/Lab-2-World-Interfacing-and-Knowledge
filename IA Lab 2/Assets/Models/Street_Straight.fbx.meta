@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: ac1dc36d300e429408012bec9896e5b9
+guid: 14659d8fa4920ed4bac1c91534a2d6b8
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -7,8 +7,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: standardSurface1
-    second: {fileID: 2100000, guid: 269e71ac8ab1ccc41a55b346dcb15f52, type: 2}
+      name: Atlas.009
+    second: {fileID: 2100000, guid: 69e98aeb12ba10d46b7b9441590859a3, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
