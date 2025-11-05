@@ -10,25 +10,30 @@ public class ZombieBehaviour : MonoBehaviour
 
     NavMeshAgent _agent;
     Animator _animator;
+    ZombiesManager _zombiesManager;
 
     [Header("PURSUE")]
     public float distanceToPursue = 20;
     public float lookAngleToPursue = 30;
     public float stopPursueTime = 5.0f;
+    public float runSpeed;
 
     [Header("WANDER")]
     public float updatePointTime = 10.0f;
     public Vector3 mapBounds;
+    public float walkSpeed;
 
     float cooldownWander = 0;
     public float cooldownPursue = 0;
     Vector3 wanderTarget = Vector3.zero;
     Transform smellTarget = null;
 
+
     private void Awake()
     {
         _agent = GetComponent<NavMeshAgent>();
         _animator = GetComponentInChildren<Animator>();
+        _zombiesManager = GetComponentInParent<ZombiesManager>();
     }
 
     void Start()
@@ -83,12 +88,12 @@ public class ZombieBehaviour : MonoBehaviour
             bool didHit = Physics.Raycast(origin, rayDirection.normalized, out hit, distanceToTarget);
            
             Debug.DrawRay(origin, rayDirection);
-            Debug.Log(didHit);
 
             if (didHit)
             {
                 if (hit.transform.tag == "Player")
                 {
+                    _zombiesManager.OnSeePlayer(target.transform.position);
                     cooldownPursue = 0;
                     return true;
                 }
@@ -105,14 +110,17 @@ public class ZombieBehaviour : MonoBehaviour
         
         if (CanSeeTarget() || cooldownPursue < stopPursueTime)
         {
+            _agent.speed = runSpeed;
             Pursue();
         }
-        else if (smellTarget != null)////SMELL
+        else if (smellTarget != null)
         {
+            _agent.speed = walkSpeed;
             Seek(smellTarget.position);
         }
         else
         {
+            _agent.speed = walkSpeed;
             if (cooldownWander > updatePointTime)
             {
                 Wander();
@@ -125,7 +133,19 @@ public class ZombieBehaviour : MonoBehaviour
 
     public void SetSmellTransform(Transform T)
     {
+        _zombiesManager.OnSeeBlood(T);
         smellTarget = T;
+    }
+
+    public void SeeSmell(Transform T)
+    {
+        smellTarget = T;
+    }
+
+    public void SeePlayer(Vector3 position)
+    {
+        cooldownPursue = 0;
+        Seek(position);
     }
 }
 
