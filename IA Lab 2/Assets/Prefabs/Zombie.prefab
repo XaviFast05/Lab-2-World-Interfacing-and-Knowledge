@@ -107,7 +107,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: baba64fc1bbd196489ff057f980a8a1c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 6.02
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: baba64fc1bbd196489ff057f980a8a1c, type: 3}
       propertyPath: m_LocalRotation.w
@@ -115,15 +115,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: baba64fc1bbd196489ff057f980a8a1c, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: baba64fc1bbd196489ff057f980a8a1c, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: baba64fc1bbd196489ff057f980a8a1c, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: baba64fc1bbd196489ff057f980a8a1c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -464,8 +464,9 @@ MonoBehaviour:
   stopPursueTime: 3
   runSpeed: 3.5
   updatePointTime: 10
-  mapBounds: {x: 24, y: 0, z: 24}
+  mapBounds: {x: 72, y: 0, z: 72}
   walkSpeed: 1.5
+  playerRadius: 50
   cooldownPursue: 0
 --- !u!95 &6812974146326418953
 Animator:

@@ -22,12 +22,14 @@ public class ZombieBehaviour : MonoBehaviour
     public float updatePointTime = 10.0f;
     public Vector3 mapBounds;
     public float walkSpeed;
+    public float playerRadius = 20.0f;
 
     float cooldownWander = 0;
     public float cooldownPursue = 0;
     Vector3 wanderTarget = Vector3.zero;
     Transform smellTarget = null;
 
+ 
 
     private void Awake()
     {
@@ -56,9 +58,15 @@ public class ZombieBehaviour : MonoBehaviour
 
     void Wander()
     {
-        wanderTarget = new Vector3(UnityEngine.Random.Range(mapBounds.x / 2, -mapBounds.x / 2),
-                                        0,
-                                        UnityEngine.Random.Range(mapBounds.z / 2, -mapBounds.z / 2));
+
+        Vector2 randomCircle = UnityEngine.Random.insideUnitCircle * playerRadius;
+        Vector3 randomPoint = target.transform.position + new Vector3(randomCircle.x, 0, randomCircle.y);
+
+        randomPoint.x = Mathf.Clamp(randomPoint.x, -mapBounds.x / 2, mapBounds.x / 2);
+        randomPoint.z = Mathf.Clamp(randomPoint.z, -mapBounds.z / 2, mapBounds.z / 2);
+
+        wanderTarget = randomPoint;
+
         Seek(wanderTarget);
     }
 
